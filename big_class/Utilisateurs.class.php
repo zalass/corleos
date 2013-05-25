@@ -25,7 +25,9 @@ class Utilisateurs
 			  $_motpass,
 			  $_region,
 			  $_ville,
-			  $_commune;
+			  $_commune,
+			  $_pseudo,
+			  $_secteuractivite;
 	
 	
 	const  NOM_INVALIDE=1;
@@ -36,6 +38,8 @@ class Utilisateurs
 	const  REPONSE_INVALIDE=6;
 	const  EXISTENCE_INVALIDE=7;
 	const  MOTPASS_INVALIDE=8;
+	const  SECTEURACTIVITE_INVALIDE=9;
+	const  PSEUDO_INVALIDE=10;
 	
 	public function __construct($valeur=array())
 	{
@@ -71,14 +75,14 @@ class Utilisateurs
 	
 	public function setIdutilisateurs($idutilisateurs)
 	{
-		$this->_idutilisateurs=(int)htmlspecialchars($idutilisateurs);
+		$this->_idutilisateurs=(int)strip_tags($idutilisateurs);
 	}
 	
 	public function setNom($nom)
 	{
 		if(is_string($nom)&&strlen($nom)<=30)
 		{
-			$this->_nom=(string)htmlspecialchars($nom);
+			$this->_nom=(string)strip_tags($nom);
 			
 		}
 		else
@@ -91,7 +95,7 @@ class Utilisateurs
 	{
 		if(is_string($prenom)&&strlen($prenom)<=30)
 		{
-			$this->_prenom=(string)htmlspecialchars($prenom);
+			$this->_prenom=(string)strip_tags($prenom);
 			
 		}
 		else
@@ -116,7 +120,7 @@ class Utilisateurs
 	{
 		if(is_string($email)&&pregmatch("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $email))
 		{
-			$this->_email=(string)htmlspecialchars($email);
+			$this->_email=(string)strip_tags($email);
 		}
 		else
 		{
@@ -128,7 +132,7 @@ class Utilisateurs
 	{
 		if(is_string($question)&&!empty($question))
 		{
-			$this->_question=(string)htmlspecialchars($question);
+			$this->_question=(string)strip_tags($question);
 		}
 		else
 		{
@@ -140,7 +144,7 @@ class Utilisateurs
 	{
 		if(is_string($reponse)&&!empty($reponse))
 		{
-			$this->_reponse=(string)htmlspecialchars($reponse);
+			$this->_reponse=(string)strip_tags($reponse);
 		}
 		else
 		{
@@ -152,7 +156,7 @@ class Utilisateurs
 	{
 		if(is_string($existence)&& strlen($existence)==1)
 		{
-			$this->_existence=(string)htmlspecialchars($existence);
+			$this->_existence=(string)strip_tags($existence);
 		}
 		else
 		{
@@ -164,7 +168,7 @@ class Utilisateurs
 	{
 		if(is_string($naissance)&& preg_match('`le [0-9]{2}/[0-9]{2}/[0-9]{4}`', $naissance))
 		{
-			$this->_naissance=htmlspecialchars($naissance);
+			$this->_naissance=strip_tags($naissance);
 		}
 	}
 	
@@ -172,7 +176,7 @@ class Utilisateurs
 	{
 		if(is_string($motpass)&& !empty($motpass))
 		{
-			$this->_motpass=(string)htmlspecialchars($motpass);
+			$this->_motpass=(string)strip_tags($motpass);
 		}
 		else
 		{
@@ -180,7 +184,72 @@ class Utilisateurs
 		}
 	}
 	
+	public function setVille($ville)
+	{
+		
+		$this->_ville=(string)strip_tags($ville);
+	}
+	
+	public function setRegion($region)
+	{
+		$this->_region=(string)strip_tags($region);
+	}
+	
+	public function setCommune($commune)
+	{
+		$this->_commune=(string)strip_tags($commune);
+	}
+	
+	public function setSecteuractivite($secteur)
+	{
+		if(is_string($secteur)&&!empty($secteur))
+		{
+			$this->_secteuractivite=(string)strip_tags($secteur);
+		}
+		else
+		{
+			$this->erreur[]=self::SECTEURACTIVITE_INVALIDE;
+		}
+		
+	}
+	
+	public function setPseudo($pseudo)
+	{
+		if(is_string($pseudo)&&strlen($pseudo)<=30&&!empty($pseudo))
+		{
+			$this->_pseudo=(string)strip_tags($pseudo);
+		}
+		else
+		{
+			$this->erreur[]=self::PSEUDO_INVALIDE;
+		}
+	}
+	
 	//LISTE DES GETTERS 
+	public function ville()
+	{
+		return $this->_ville;
+	}
+	
+	public function region()
+	{
+		return $this->_region;
+	}
+	
+	public function commune()
+	{
+		return $this->_commune;
+	}
+	
+	public function secteuractivite()
+	{
+		return $this->_secteuractivite;	
+	}
+	
+	public function pseudo()
+	{
+		return $this->_pseudo;
+	}
 	
 	public function idutilisateurs()
 	{
