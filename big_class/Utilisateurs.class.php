@@ -22,7 +22,10 @@ class Utilisateurs
 			  $_reponse,
 			  $_existence,
 			  $_naissance,
-			  $_motpass;
+			  $_motpass,
+			  $_region,
+			  $_ville,
+			  $_commune;
 	
 	
 	const  NOM_INVALIDE=1;
