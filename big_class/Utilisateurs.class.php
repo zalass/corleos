@@ -27,6 +27,7 @@ class Utilisateurs
 			  $_ville,
 			  $_commune,
 			  $_pseudo,
+			  $_pays,
 			  $_secteuractivite;
 	
 	
@@ -40,6 +41,7 @@ class Utilisateurs
 	const  MOTPASS_INVALIDE=8;
 	const  SECTEURACTIVITE_INVALIDE=9;
 	const  PSEUDO_INVALIDE=10;
+	const  PAYS_INVALIDE=11;
 	
 	public function __construct($valeur=array())
 	{
@@ -76,6 +78,12 @@ class Utilisateurs
 	public function setIdutilisateurs($idutilisateurs)
 	{
 		$this->_idutilisateurs=(int)strip_tags($idutilisateurs);
+	}
+	
+	public function setPays($pays)
+	{
+			$this->_pays=(int)striptags($pays);
+		
 	}
 	
 	public function setNom($nom)
@@ -229,6 +237,11 @@ class Utilisateurs
 	public function ville()
 	{
 		return $this->_ville;
+	}
+	
+	public function pays()
+	{
+		return $this->_pays;
 	}
 	
 	public function region()

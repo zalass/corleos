@@ -3,12 +3,12 @@
 /**
  * Utilisateurs
  * 
- * This class has been created by MBAMBA Fabrice Damien
+ * This class has been created by MFD corp
  * 
  * @package    epharma
  * @subpackage model
  * @author     MBAMBA Fbrice Damien
- * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
+ * @version    1.0
  */
 abstract class Utilisateurs
 {
