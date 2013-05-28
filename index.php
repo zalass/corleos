@@ -1,10 +1,11 @@
 ﻿<?php
-	require_once ('/config/config.php');
+	
 	require_once ('/config/autoloader.php');
 	JK\Autoloader::getInstance()
-	->addDirectory('big_class')
-	->addEntireDirectory('big_class');
+	->addDirectory('')
+	->addEntireDirectory('');
 	$db = Dbfactory::getMysqlConnexionWithPDO();
+	$usermanager=new UtilisateursManager_PDO();
 	
 	$action =  isset($_GET['action']) ? $_GET['action'] : "";
 	

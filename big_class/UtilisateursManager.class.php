@@ -10,7 +10,7 @@
  * @author     MBAMBA Fbrice Damien
  * @version    1.0
  */
-abstract class Utilisateurs
+abstract class UtilisateursManager
 {
 	/**
 	 * Méthode permettant d'ajouter un utilisateurs
@@ -80,7 +80,7 @@ abstract class Utilisateurs
 		}
 		else
 		{
-			throw new RuntimeException('L\'utilisateurs doit être valide pour être enregistré');
+			 throw new RuntimeException(' L\'utilisateurs doit être valide pour être enregistré ');
 		}
 	}
 	/**

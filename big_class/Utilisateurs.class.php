@@ -70,7 +70,7 @@ class Utilisateurs
 	
 	public function isValid()
 	{
-		return !(empty($this->_nom)||empty($this->_prenom)||empty($this->_email)||empty($this->_question)||empty($this->_reponse)||empty($this->_existence)||empty($this->_motpass)||empty($this->_naissance));	
+		return !(empty($this->_email)||empty($this->_motpass)||empty($this->_pseudo));	
 	}
 	
 	//LISTE DES SETTERS
@@ -126,7 +126,7 @@ class Utilisateurs
 	
 	public function setEmail($email)
 	{
-		if(is_string($email)&&pregmatch("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $email))
+		if(is_string($email)&&preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $email))
 		{
 			$this->_email=(string)strip_tags($email);
 		}
@@ -180,7 +180,7 @@ class Utilisateurs
 		}
 	}
 	
-	public function setMotpass()
+	public function setMotpass($motpass)
 	{
 		if(is_string($motpass)&& !empty($motpass))
 		{
@@ -301,7 +301,7 @@ class Utilisateurs
 	
 	public function existence()
 	{
-		return $this->_existence();
+		return $this->_existence;
 	}
 	
 	public function naissance()

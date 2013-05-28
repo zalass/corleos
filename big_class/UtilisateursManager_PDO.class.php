@@ -12,6 +12,20 @@
  */
 class UtilisateursManager_PDO extends UtilisateursManager
 {
+	protected $_db;
+	
+	public function __construct(PDO $db)
+	{
+		$this->_db=$db;
+	}
+	
+	public function verifdonnees($val, $val2)
+	{
+		
+		$requete=$this->_db->prepare('SELECT email, pseudo FROM utilisateurs WHERE email=:email OR pseudo=:pseudo ');
+		$requete->execute(array('email'=>$val, 'pseudo'=>$val2));
+		return (bool)$requete->fetchColumn();
+	}
 	protected function add(Utilisateurs $utilisateur)
 	{
 		try
@@ -19,7 +33,7 @@ class UtilisateursManager_PDO extends UtilisateursManager
 			$this->_db->beginTransaction();
 			
 			$requete=$this->_db->prepare('INSERT INTO utilisateurs SET nom=:nom, prenom=:prenom, photo=:photo, email=:email, question=:question, reponse=:reponse, 
-			 existence=:existence, naissance=:naissance, motpass=:motpass, 
+			 existence=\'1\', naissance=:naissance, motpass=:motpass, 
 			 region=:region, ville=:ville, commune=:commune, pseudo=:pseudo, pays=:pays, secteuractivite=:secteuractivite');
 			$requete->BindValue(':nom', $utilisateur->nom());
 			$requete->BindValue(':prenom', $utilisateur->prenom());
@@ -27,7 +41,6 @@ class UtilisateursManager_PDO extends UtilisateursManager
 			$requete->BindValue(':email', $utilisateur->email());
 			$requete->BindValue(':question', $utilisateur->question());
 			$requete->BindValue(':reponse', $utilisateur->reponse());
-			$requete->BindValue(':existence', $utilisateur->existence());
 			$requete->BindValue(':naissance', $utilisateur->naissance());
 			$requete->BindValue(':motpass', $utilisateur->motpass());
 			$requete->BindValue(':region', $utilisateur->region());
@@ -35,13 +48,15 @@ class UtilisateursManager_PDO extends UtilisateursManager
 			$requete->BindValue(':commune', $utilisateur->commune());
 			$requete->BindValue(':pseudo', $utilisateur->pseudo());
 			$requete->BindValue(':pays', $utilisateur->pays());
-			$requete->BindValue(':secteuractivite', secteuractivite());
+			$requete->BindValue(':secteuractivite', $utilisateur->secteuractivite());
+			
 			$requete->execute();
 			
 			$this->_db->commit();
 		}
 		catch(PDOException $e)
 		{
+			echo $e;
 			$this->_db->rollback();
 		}
 		
